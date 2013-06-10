@@ -39,7 +39,7 @@ class output_sql(air_modes.parse, pubsub):
     c = self._db.cursor()
     query = """CREATE TABLE IF NOT EXISTS "positions" (
               "icao" INTEGER KEY NOT NULL,
-              "seen" TEXT NOT NULL,
+              "seen" DATETIME NOT NULL,
               "alt"  INTEGER,
               "lat"  REAL,
               "lon"  REAL
@@ -47,7 +47,7 @@ class output_sql(air_modes.parse, pubsub):
     c.execute(query)
     query = """CREATE TABLE IF NOT EXISTS "vectors" (
               "icao"     INTEGER KEY NOT NULL,
-              "seen"     TEXT NOT NULL,
+              "seen"     DATETIME NOT NULL,
               "speed"    REAL,
               "heading"  REAL,
               "vertical" REAL
@@ -80,7 +80,7 @@ class output_sql(air_modes.parse, pubsub):
             c = self._db.cursor()
             c.execute(query)
             c.close()
-#            self._db.commit()
+            self._db.commit()
 
       except ADSBError:
         pass
